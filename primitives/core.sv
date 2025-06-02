@@ -141,7 +141,18 @@ module std_lt #(
    output logic out
 );
   assign out = left < right;
+endmodule // std_lt
+
+module std_sgt #(
+    parameter WIDTH = 32
+) (
+   input wire   logic [WIDTH-1:0] left,
+   input wire   logic [WIDTH-1:0] right,
+   output logic out
+);
+  assign out = (($signed(left) < $signed(right)) ? 1: 0);
 endmodule
+
 
 module std_eq #(
     parameter WIDTH = 32
@@ -191,6 +202,28 @@ module std_rsh #(
    output logic [WIDTH-1:0] out
 );
   assign out = left >> right;
+endmodule // std_rsh
+
+// shift left logical
+module std_sll #(
+    parameter WIDTH = 32
+) (
+   input wire               logic [WIDTH-1:0] left,
+   input wire               logic [WIDTH-1:0] right,
+   output logic [WIDTH-1:0] out
+);
+  assign out = left << right;
+endmodule // std_sll
+
+// shift right arithmatic
+module std_sra #(
+    parameter WIDTH = 32
+) (
+   input wire               logic [WIDTH-1:0] left,
+   input wire               logic [WIDTH-1:0] right,
+   output logic [WIDTH-1:0] out
+);
+  assign out = $signed(left) >>> right;
 endmodule
 
 /// this primitive is intended to be used
